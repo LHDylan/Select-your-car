@@ -5,7 +5,11 @@ window.onload = function () {
      * Appel de la function createForm
      */
     form = Object.create(Json);
+    form.formContainer = document.getElementById('form-container');
     form.createForm();
+    form.resultContainer = document.getElementById('result-container');
+    form.createVoiture();
+
 };
 
 

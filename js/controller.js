@@ -1,8 +1,13 @@
 var Json = {
-
+    formContainer: null,
+    resultContainer: null,
+    typeValue: null,
+    colorValue: null,
+    
     /**
      * Function qui permet d'instancier les objects contenus dans color.js et voiture.js
      */
+
     setVoiture: function (type, image) {
         this.type = type;
         this.image = image;
@@ -10,24 +15,18 @@ var Json = {
     setColor: function (color) {
         this.color = color;
     },
-
     /**
      * Function qui permet de créer le formulaire
      */
     createForm: function () {
-        var formContainer = document.getElementById("form-container");
-        // console.log(formContainer);
-
         // Création du form
         var form = document.createElement("form");
         form.setAttribute("id", "form");
 
-
         // Création du label pour le selecteur de type de voiture
         var typeLabel = document.createElement("label");
-        // <label></label>
         typeLabel.setAttribute("for", "type-select");
-        // <label for="type-select"></label>
+        typeLabel.innerHTML = "Choisissez un type de voiture";
 
         // création du selecteur du type
         var typeSelect = document.createElement("select");
@@ -36,7 +35,7 @@ var Json = {
         typePlaceholder.setAttribute("value", "");
         typePlaceholder.setAttribute("selected", "selected");
         typePlaceholder.setAttribute("disabled", "disabled");
-        typeSelect.appendChild(typePlaceholder).innerHTML = "Choisissez un type de voiture";
+        typeSelect.appendChild(typePlaceholder).innerHTML = "-- le type --";
 
         for(var i=0; i<voitureList.length; i++){
             var typeOption = document.createElement("option");
@@ -48,6 +47,7 @@ var Json = {
         // Création du label pour le selecteur de couleur
         var colorLabel = document.createElement("label");
         colorLabel.setAttribute("for", "color-select");
+        colorLabel.innerHTML = "Choisissez une couleur de voiture";
 
         // création du selecteur de couleur
         var colorSelect = document.createElement("select");
@@ -56,7 +56,7 @@ var Json = {
         colorPlaceholder.setAttribute("value", "");
         colorPlaceholder.setAttribute("selected", "selected");
         colorPlaceholder.setAttribute("disabled", "disabled");
-        colorSelect.appendChild(colorPlaceholder).innerHTML = "Choisissez la couleur de voiture";
+        colorSelect.appendChild(colorPlaceholder).innerHTML = "-- la couleur --";
         
         for(var i=0; i<colorList.length; i++){
             var colorOption = document.createElement("option");
@@ -64,29 +64,51 @@ var Json = {
             // console.log(voitureList[i].color);
             colorSelect.appendChild(colorOption).innerHTML = colorList[i].color;
         }
+
         // Création du button pour annuler le formulaire
         var resetButton = document.createElement("input");
         resetButton.setAttribute("type", "reset");
         resetButton.setAttribute("value", "Annuler");
-
+        
         // Création du button pour envoyer le formulaire
         var submitButton = document.createElement("input");
         submitButton.setAttribute("type", "button");
         submitButton.setAttribute("value", "Envoyer");
-
+        submitButton.addEventListener("click", this.getFormValues);
 
         // Ajout des éléments au form
-            form.appendChild(typeLabel);
-            form.appendChild(typeSelect);
-            form.appendChild(colorLabel);
-            form.appendChild(colorSelect);
-            form.appendChild(resetButton);
-            form.appendChild(submitButton);
-
+        form.appendChild(typeLabel);
+        form.appendChild(typeSelect);
+        form.appendChild(colorLabel);
+        form.appendChild(colorSelect);
+        form.appendChild(resetButton);
+        form.appendChild(submitButton);
+        
         // Ajout du form au formContainer qui représente la div id#form-container
-            formContainer.appendChild(form);
-    }
-
+        this.formContainer.appendChild(form);
+    },
     // Function qui reçoit les données du formulaire
-        //-- le code --//
+        getFormValues: function () {
+            typeValue = document.getElementById("type-select").value;
+            colorValue = document.getElementById("color-select").value;
+            if (typeValue && colorValue) {
+                console.log(typeValue, colorValue);
+            } else {
+                alert("Veuillez choisir un type et une couleur");
+            }
+        },
+    
+    createVoiture: function() {
+        var selectedVoiture = voitureList.filter(function(voiture) {
+            return voiture.type === typeValue;
+        })[0];
+        if (selectedVoiture){
+        var voiture = document.createElement("img");
+        voiture.setAttribute("src", "images/" + selectedVoiture.image);
+        voiture.setAttribute("id", typeValue);
+        voiture.setAttribute("alt", typeValue);
+        voiture.setAttribute("style", "background-color: " + colorValue + ";");
+        this.resultContainer.appendChild(voiture);
+    }
+    }
 }
