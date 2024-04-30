@@ -3,37 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="script.js"></script>
-    <script>
 
-      var v1 = Object.create(voiture);
-      v1.couleur = 'blue';
-      v1.type = "berline";
+    <link rel="stylesheet" href="css/style.css">
 
-      var v2 = Object.create(voiture);
-      v2.couleur = 'yellow';
-      v2.type = "familiale";
-
-      var v3 = Object.create(voiture);
-
-      window.onload = function () {
-        afficherVoiture(v1);
-        afficherVoiture(v2);
-        afficherVoiture(v3);
-
-      };
-
-
-      function afficherVoiture(o){
-        document.querySelector('div').innerHTML +=
-          "<img src='" + o.type + ".png' style='background-color:"+o.couleur+"'/>";
-
-      }
-
-    </script>
+    <script src="js/color.js"></script>
+    <script src="js/voiture.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/main.js" ></script>
+    
     <title>Voiture</title>
   </head>
+
   <body>
-    <div></div>
+    <header></header>
+
+    <main>
+      <div id="form-container"><!-- Le formulaire --></div>
+
+      <div id="type-description"><!-- Description du type choisis --></div>
+
+      <div id="result"><!-- La voiture crée par le formulaire --></div>
+    </main>
+
+    <footer></footer>
   </body>
 </html>
