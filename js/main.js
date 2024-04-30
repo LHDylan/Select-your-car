@@ -6,13 +6,11 @@ window.onload = function () {
      */
     form = Object.create(Json);
     form.formContainer = document.getElementById('form-container');
-    form.createForm();
     form.resultContainer = document.getElementById('result-container');
-    form.createVoiture();
+    form.createForm();
+    //form.createVoiture();
 
 };
-
-
 
 /**
  * id, class = kebab-case
