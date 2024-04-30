@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="script.js"></script>
+    <script>
+
+      var v1 = Object.create(voiture);
+      v1.couleur = 'blue';
+      v1.type = "berline";
+
+      var v2 = Object.create(voiture);
+      v2.couleur = 'yellow';
+      v2.type = "familiale";
+
+      var v3 = Object.create(voiture);
+
+      window.onload = function () {
+        afficherVoiture(v1);
+        afficherVoiture(v2);
+        afficherVoiture(v3);
+
+      };
+
+
+      function afficherVoiture(o){
+        document.querySelector('div').innerHTML +=
+          "<img src='" + o.type + ".png' style='background-color:"+o.couleur+"'/>";
+
+      }
+
+    </script>
+    <title>Voiture</title>
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
