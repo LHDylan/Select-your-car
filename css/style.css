@@ -18,7 +18,7 @@ body main div:first-of-type {
   align-items: center;
   width: 30%;
   margin: auto;
-  background-color: aquamarine;
+  background-color: lightsalmon;
 }
 body main div:nth-child(2) {
   display: flex;
