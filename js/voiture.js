@@ -13,5 +13,11 @@ var voitureList = [
         type: "citadine",
         image: "citadine.png",
         description:"C'est quoi une citadine ? La citadine, comme son nom l'indique, est une petite voiture destinée à la ville. Ses dimensions contenues lui confèrent une bonne maniabilité lui permettant de se faufiler partout et de se garer dans les plus petites places de stationnement.",
+    },
+    {
+        type: "sportive",
+        image: "sportive.png",
+        description: "La voiture de sport est une voiture qui roule vite. La plupart des voitures de sport sont de type coupé-cabriolet"
     }
+
 ]

@@ -3,10 +3,13 @@ var colorList = [
     color: "red"
     },
     {
-    color: "green"
+    color: "yellow"
     },
     {
     color: "blue"
+    },
+    {
+    color: "grey"
     }
 ]
 

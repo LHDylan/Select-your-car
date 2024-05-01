@@ -6,9 +6,10 @@ var Json = {
    * Function qui permet d'instancier les objects contenus dans color.js et voiture.js
    */
 
-  setVoiture: function (type, image) {
+  setVoiture: function (type, image, description) {
     this.type = type;
     this.image = image;
+    this.image = description;
   },
   setColor: function (color) {
     this.color = color;
@@ -72,15 +73,10 @@ var Json = {
     var submitButton = document.createElement("input");
     submitButton.setAttribute("type", "button");
     submitButton.setAttribute("value", "Envoyer");
-    submitButton.addEventListener("click", this.getFormValues);
+    submitButton.addEventListener("click", this.createVoiture);
 
     // Ajout des éléments au form
-    form.appendChild(typeLabel);
-    form.appendChild(typeSelect);
-    form.appendChild(colorLabel);
-    form.appendChild(colorSelect);
-    form.appendChild(resetButton);
-    form.appendChild(submitButton);
+    form.append(typeLabel, typeSelect, colorLabel, colorSelect, resetButton, submitButton);
 
     // Ajout du form au formContainer qui représente la div id#form-container
     this.formContainer.appendChild(form);
@@ -88,17 +84,17 @@ var Json = {
 
 
   // Function qui reçoit les données du formulaire
-  getFormValues: function () {
+  createVoiture: function () {
     typeValue = document.getElementById("type-select").value;
     colorValue = document.getElementById("color-select").value;
     if (typeValue && colorValue) {
 
       console.log(typeValue, colorValue);
       var voiture = document.createElement("img");
-      voiture.setAttribute("src", "images/" + typeValue + '.png');
-      voiture.setAttribute("id", typeValue);
-      voiture.setAttribute("alt", typeValue);
-      voiture.setAttribute("style", "background-color: " + colorValue + ";");
+      voiture.setAttribute("src", "images/voitures/" + typeValue + "-"  + colorValue + '.png');
+      voiture.setAttribute("id", typeValue + "-" + colorValue);
+      voiture.setAttribute("alt", typeValue + "-" + colorValue);
+      // voiture.setAttribute("style", "background-color: " + colorValue + ";");
       form.resultContainer.appendChild(voiture);
 
     } else {

@@ -8,7 +8,6 @@ window.onload = function () {
     form.formContainer = document.getElementById('form-container');
     form.resultContainer = document.getElementById('result-container');
     form.createForm();
-    //form.createVoiture();
 
 };
 
