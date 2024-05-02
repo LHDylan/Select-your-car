@@ -141,6 +141,7 @@ var Json = {
     newVoiture.image = "images/voitures/" + typeValue + "-" + colorValue + ".png";
     newVoiture.color = colorValue;
     newVoiture.speed = speedValue;
+    newVoiture.position = 0;
     this.raceCars.push(newVoiture);
     // console.log(this.raceCars);
   },
@@ -153,16 +154,20 @@ var Json = {
     // Création d'une div pour les fonctionnalités de la course
     var RaceButtons = document.createElement("div");
     RaceButtons.setAttribute("id", "race-buttons");
-    
-      // Bouton pour commencer la course
-      var buttonRaceStart = document.createElement("button");
-      buttonRaceStart.setAttribute("type", "button");
-      buttonRaceStart.innerHTML = "Start";
 
-      // Bouton pour arreter la course
-      var buttonRaceStop = document.createElement("button");
-      buttonRaceStop.setAttribute("type", "button");
-      buttonRaceStop.innerHTML = "Stop";
+    // Bouton pour commencer la course
+    var buttonRaceStart = document.createElement("button");
+    buttonRaceStart.setAttribute("type", "button");
+    buttonRaceStart.innerHTML = "Start";
+    buttonRaceStart.addEventListener("click", function () {
+      Json.startRace(Json.raceCars);
+    });
+    // app.startRace(app.raceCars);
+
+    // Bouton pour arreter la course
+    var buttonRaceStop = document.createElement("button");
+    buttonRaceStop.setAttribute("type", "button");
+    buttonRaceStop.innerHTML = "Stop";
 
     // Ajout des boutons au div#race-buttons
     RaceButtons.append(buttonRaceStart, buttonRaceStop);
@@ -173,10 +178,10 @@ var Json = {
 
     // Ajout des images de voitures à la div#race-course
     for (var i = 0; i < this.raceCars.length; i++) {
-      console.log(this.raceCars[i]);
+      // console.log(this.raceCars[i]);
       var raceCar = document.createElement("img");
       raceCar.setAttribute("src", "images/voitures/" + this.raceCars[i].type + "-" + this.raceCars[i].color + ".png");
-      raceCar.setAttribute("id", this.raceCars[i].type + "-" + this.raceCars[i].color);
+      raceCar.setAttribute("id", this.raceCars[i].type + "-" + this.raceCars[i].color + "-" + i);
       raceCar.setAttribute("alt", this.raceCars[i].type + "-" + this.raceCars[i].color);
       raceCar.style.marginTop = i * 110 + "px";
       RaceCourse.append(raceCar);
@@ -184,8 +189,24 @@ var Json = {
 
     // Ajout des divs à la div#race-container
     this.raceContainer.append(RaceButtons, RaceCourse);
-  }
 
+    // Bouton pour commencer la course
+  },
 
-  
+  startRace: function (raceCars) {
+    for (var i = 0; i < raceCars.length; i++) {
+      // console.log(raceCars[i].position);
+      // console.log(document.getElementsByTagName("img")[i]);
+      // raceCars[i].position += raceCars[i].speed;
+      if (raceCars[i].position < 3770) {
+        // document.querySelector("#race-container img:first-of-type").style.left =+ 50;
+        // document.getElementsByTagName("img")[i].style.left += raceCars[i].speed + "px";
+        console.log("on avance");
+        // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+      } else {
+        ("Bravo, vous avez gagné !");
+        // break;
+      }
+    }
+  },
 };

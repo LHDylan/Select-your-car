@@ -32,5 +32,6 @@ var voiture = {
     color: null,
     speed: null,
     top: null,
-    left: null
+    left: null,
+    position: null
 }
