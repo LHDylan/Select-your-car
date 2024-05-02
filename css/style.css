@@ -1,25 +1,35 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
-body header {
+body div#wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+body div#wrapper header {
   width: 100%;
-  height: 100px;
-  background-color: burlywood;
+  height: 75px;
+  background-color: #1a1a1a;
 }
-body main div#container {
+body div#wrapper main {
+  background-color: antiquewhite;
+  height: 100%;
+}
+body div#wrapper main div#container {
   display: flex;
   justify-content: space-between;
   align-content: center;
 }
-body main div#container div:first-of-type {
+body div#wrapper main div#container div#form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30%;
   margin: auto;
 }
-body main div#container div:first-of-type form {
+body div#wrapper main div#container div#form-container form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -30,7 +40,7 @@ body main div#container div:first-of-type form {
   border-radius: 5px;
   box-shadow: 2px 2px 2px lightgrey;
 }
-body main div#container div:first-of-type form input {
+body div#wrapper main div#container div#form-container form input {
   width: 50%;
   height: 50px;
   border: none;
@@ -39,34 +49,53 @@ body main div#container div:first-of-type form input {
   border-radius: 5px;
   box-shadow: 2px 2px 2px lightgrey;
 }
-body main div#container div:first-of-type form input:hover {
+body div#wrapper main div#container div#form-container form input:hover {
   background-color: grey;
   color: antiquewhite;
   cursor: pointer;
 }
-body main div#container div:nth-child(2) {
+body div#wrapper main div#container div#description-container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 30%;
 }
-body main div#container div:last-of-type {
+body div#wrapper main div#container div#result-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin: auto;
   width: 30%;
 }
-body main div#race-container {
-  display: none;
-  background-color: crimson;
+body div#wrapper main div#race-container {
   width: 100%;
-  height: 500px;
+  height: 430px;
 }
-body footer {
-  position: fixed;
-  bottom: 0;
+body div#wrapper main div#race-container div#race-buttons {
+  height: 50px;
+  width: 100%;
+  background-color: crimson;
+  display: flex;
+  align-items: center;
+}
+body div#wrapper main div#race-container div#race-buttons button {
+  box-shadow: 2px 2px 5px lightslategray;
+  margin-top: auto;
+  margin-bottom: auto;
+  padding: 10px;
+}
+body div#wrapper main div#race-container div#race-course {
+  top: 50%;
+  position: relative;
+  background-image: url("../images/piste.png");
+  background-repeat: no-repeat;
+  height: 100%;
+}
+body div#wrapper main div#race-container div#race-course img {
+  position: absolute;
+}
+body div#wrapper footer {
   width: 100%;
   height: 50px;
-  background-color: burlywood;
+  background-color: #1a1a1a;
 }/*# sourceMappingURL=style.css.map */

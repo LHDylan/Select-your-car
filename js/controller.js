@@ -118,12 +118,12 @@ var Json = {
     colorValue = document.getElementById("color-select").value;
     speedValue = document.getElementById("speed-select").value;
     if (typeValue && colorValue && speedValue) {
-      console.log(typeValue, colorValue);
+      // console.log(typeValue, colorValue);
       var voiture = document.createElement("img");
       voiture.setAttribute("src", "images/voitures/" + typeValue + "-" + colorValue + ".png");
       voiture.setAttribute("id", typeValue + "-" + colorValue);
       voiture.setAttribute("alt", typeValue + "-" + colorValue);
-      if (app.raceCars.length > 2) {
+      if (app.raceCars.length > 3) {
         alert("Vous avez atteint le nombre maximum de voitures");
         document.getElementById("container").style.display = "none";
         app.createRace();
@@ -142,12 +142,13 @@ var Json = {
     newVoiture.color = colorValue;
     newVoiture.speed = speedValue;
     this.raceCars.push(newVoiture);
-    console.log(this.raceCars);
+    // console.log(this.raceCars);
   },
 
   createRace: function () {
     raceContainer = document.getElementById("race-container");
     this.raceContainer.style.display = "block";
+    document.getElementsByTagName("body")[0].style.width = "3770px";
 
     // Création d'une div pour les fonctionnalités de la course
     var RaceButtons = document.createElement("div");
@@ -170,8 +171,21 @@ var Json = {
     var RaceCourse = document.createElement("div");
     RaceCourse.setAttribute("id", "race-course");
 
+    // Ajout des images de voitures à la div#race-course
+    for (var i = 0; i < this.raceCars.length; i++) {
+      console.log(this.raceCars[i]);
+      var raceCar = document.createElement("img");
+      raceCar.setAttribute("src", "images/voitures/" + this.raceCars[i].type + "-" + this.raceCars[i].color + ".png");
+      raceCar.setAttribute("id", this.raceCars[i].type + "-" + this.raceCars[i].color);
+      raceCar.setAttribute("alt", this.raceCars[i].type + "-" + this.raceCars[i].color);
+      raceCar.style.marginTop = i * 110 + "px";
+      RaceCourse.append(raceCar);
+    }
+
     // Ajout des divs à la div#race-container
     this.raceContainer.append(RaceButtons, RaceCourse);
-
   }
+
+
+  
 };

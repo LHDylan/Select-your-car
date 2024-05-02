@@ -1,82 +1,115 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
 
-    header {
+  div#wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    
+      header {
         width: 100%;
-        height: 100px;
-        background-color: burlywood;
+        height: 75px;
+        background-color: #1a1a1a;
     }
     
     main {
-        div#container {
-            display: flex;
-            justify-content: space-between;
-            align-content: center;
-            div {
-                &:first-of-type {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 30%;
-                    margin: auto;
-                    form {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100%;
-                        height: 100%;
-                        border: 1px solid grey;
-                        border-radius: 5px;
-                        box-shadow: 2px 2px 2px lightgrey ;
-                        input {
-                            width: 50%;
-                            height: 50px;
-                            border: none;
-                            margin-bottom: 10px;
-                            margin-top: 10px;
-                            border-radius: 5px;
-                            box-shadow: 2px 2px 2px lightgrey;
-                            &:hover {
-                                background-color: grey;
-                                color: antiquewhite;
-                                cursor: pointer;
-                            }
-                        }
-                    }
-                }
+        background-color: antiquewhite;
+        height: 100%;
     
-                &:nth-child(2) {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 30%;
+        div#container {
+          display: flex;
+          justify-content: space-between;
+          align-content: center;
+    
+    
+          div#form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            margin: auto;
+            form {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              width: 100%;
+              height: 100%;
+              border: 1px solid grey;
+              border-radius: 5px;
+              box-shadow: 2px 2px 2px lightgrey;
+              input {
+                width: 50%;
+                height: 50px;
+                border: none;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px lightgrey;
+                &:hover {
+                  background-color: grey;
+                  color: antiquewhite;
+                  cursor: pointer;
                 }
-        
-                &:last-of-type {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin:auto;
-                    width: 30%;
-                }
+              }
             }
+          }
+    
+          div#description-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+          }
+    
+          div#result-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            width: 30%;
+          }
+    
+    
+    
         }
         div#race-container {
-            display: none;
-            background-color: crimson;
+          width: 100%;
+          height: 430px;
+          div#race-buttons {
+            height: 50px;
             width: 100%;
-            height: 500px;
+            background-color: crimson;
+            display: flex;
+            align-items: center;
+            button {
+              box-shadow: 2px 2px 5px lightslategray;
+              margin-top: auto;
+              margin-bottom: auto;
+              padding: 10px;
+            }
+          }
+          div#race-course {
+            top: 50%;
+            position: relative;
+            //overflow: hidden;
+            background-image: url("../images/piste.png");
+            background-repeat: no-repeat;
+            height: 100%;
+            img {
+              position: absolute;
+            }
+          }
         }
-        
-    }
+      }
     
-    footer {
-        position: fixed;
-        bottom: 0;
+      footer {
         width: 100%;
         height: 50px;
-        background-color: burlywood;
-    }
+        background-color: #1a1a1a;
+      }
+  }
+
 }
