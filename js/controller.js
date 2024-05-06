@@ -257,8 +257,7 @@ var Json = {
 			if (i == 0) {
 				imgPodiumFirst.setAttribute("id", i);
 				imgPodiumFirst.setAttribute("src", "images/podium/premier.png");
-				imgPodiumFirst.style.left =
-					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumFirst.style.left = 3450 + "px";
 				imgPodiumFirst.style.top =
 					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
 					25 +
@@ -269,8 +268,7 @@ var Json = {
 			if (i == 1) {
 				imgPodiumSecond.setAttribute("id", i);
 				imgPodiumSecond.setAttribute("src", "images/podium/second.jpg");
-				imgPodiumSecond.style.left =
-					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumSecond.style.left = 3450 + "px";
 				imgPodiumSecond.style.top =
 					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
 					25 +
@@ -281,8 +279,7 @@ var Json = {
 			if (i == 2) {
 				imgPodiumThird.setAttribute("id", i);
 				imgPodiumThird.setAttribute("src", "images/podium/troisieme.jpg");
-				imgPodiumThird.style.left =
-					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumThird.style.left = 3450 + "px";
 				imgPodiumThird.style.top =
 					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
 					25 +
