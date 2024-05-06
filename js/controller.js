@@ -2,8 +2,12 @@ var Json = {
 	formContainer: null,
 	resultContainer: null,
 	raceContainer: null,
+	raceCourse: null,
 	raceCars: [],
 	speedest: null,
+	podium: [],
+	interval: null,
+
 	/**
 	 * Function qui permet d'instancier les objects contenus dans color.js et voiture.js
 	 */
@@ -118,29 +122,32 @@ var Json = {
 
 	// Function qui reçoit les données du formulaire
 	createVoiture: function (o) {
-		console.log(o);
-		typeValue = document.getElementById("type-select").value;
-		colorValue = document.getElementById("color-select").value;
-		speedValue = document.getElementById("speed-select").value;
-		if (typeValue && colorValue && speedValue) {
-			// console.log(typeValue, colorValue);
-			var v0 = document.createElement("img");
-			v0.setAttribute(
-				"src",
-				"images/voitures/" + typeValue + "-" + colorValue + ".png"
-			);
-			v0.setAttribute("id", typeValue + "-" + colorValue);
-			v0.setAttribute("alt", typeValue + "-" + colorValue);
-			if (o.raceCars.length > 3) {
-				alert("Vous avez atteint le nombre maximum de voitures");
-				document.getElementById("container").style.display = "none";
-				o.createRace();
-			}
-			o.resultContainer.appendChild(v0);
-			o.createRaceCars(typeValue, colorValue, speedValue, v0);
+		if (o.raceCars.length > 3) {
+			alert("Vous avez atteint le nombre maximum de voitures");
+			document.getElementById("container").style.display = "none";
+			o.createRace();
 		} else {
-			alert("Veuillez choisir un type, une couleur et une vitesse");
+			typeValue = document.getElementById("type-select").value;
+			colorValue = document.getElementById("color-select").value;
+			speedValue = document.getElementById("speed-select").value;
+			if (typeValue && colorValue && speedValue) {
+				// console.log(typeValue, colorValue);
+				var v0 = document.createElement("img");
+				v0.setAttribute(
+					"src",
+					"images/voitures/" + typeValue + "-" + colorValue + ".png"
+				);
+				v0.setAttribute("id", typeValue + "-" + colorValue);
+				v0.setAttribute("alt", typeValue + "-" + colorValue);
+
+				o.resultContainer.appendChild(v0);
+				o.createRaceCars(typeValue, colorValue, speedValue, v0);
+			} else {
+				alert("Veuillez choisir un type, une couleur et une vitesse");
+			}
 		}
+
+		// console.log(o);
 	},
 
 	createRaceCars: function (typeValue, colorValue, speedValue, image) {
@@ -153,11 +160,12 @@ var Json = {
 		newVoiture.position = 0;
 		newVoiture.left = 0;
 		newVoiture.top = nbVoiture * 110;
+		newVoiture.arrived = false;
 		this.raceCars.push(newVoiture);
-		console.log(this.raceCars);
+		// console.log(this.raceCars);
 		if (newVoiture.speed > this.speedest) {
 			this.speedest = newVoiture.speed;
-			console.log(this.speedest);
+			// console.log(this.speedest);
 		}
 	},
 
@@ -189,35 +197,100 @@ var Json = {
 		RaceButtons.append(buttonRaceStart, buttonRaceStop);
 
 		// Gestion de la course
-		var RaceCourse = document.createElement("div");
-		RaceCourse.setAttribute("id", "race-course");
+		// var RaceCourse = document.createElement("div");
+		// RaceCourse.setAttribute("id", "race-course");
 
 		// Ajout des images de voitures à la div#race-course
 		for (var i = 0; i < this.raceCars.length; i++) {
 			this.raceCars[i].image.style.marginTop = this.raceCars[i].top + "px";
-			RaceCourse.append(this.raceCars[i].image);
+			document.getElementById("race-course").append(this.raceCars[i].image);
 		}
 
 		// Ajout des divs à la div#race-container
-		this.raceContainer.append(RaceButtons, RaceCourse);
+		document.getElementById("race-bouttons").appendChild(RaceButtons);
 
 		// Bouton pour commencer la course
 	},
 
 	moveRace: function (raceCars, speedest) {
 		for (var i = 0; i < raceCars.length; i++) {
-			raceCars[i].left =
-				parseInt(raceCars[i].left) + parseInt(raceCars[i].speed);
-			console.log(raceCars[i].image);
-			raceCars[i].image.style.left = raceCars[i].left + "px";
-			app.raceContainer.style.left -= speedest + "px";
+			// console.log(raceCars[i].left);
+			if (raceCars[i].left <= 3620) {
+				raceCars[i].left =
+					parseInt(raceCars[i].left) + parseInt(raceCars[i].speed);
+				// console.log(raceCars[i].image);
+				raceCars[i].image.style.left = raceCars[i].left + "px";
+				// console.log(this.raceCourse);
+				if (parseInt(this.raceCourse.style.left) > -2800) {
+					this.raceCourse.style.left -= speedest + "px";
+				}
+			} else {
+				// permet de récuperer l'ordre et de faire le podium
+				if (!raceCars[i].arrived) {
+					this.podium.push(i);
+				}
+				raceCars[i].arrived = true;
+				if (this.podium.length >= 4) {
+					clearInterval(this.interval);
+					// console.log(this.podium);
+					this.createPodium();
+				}
+				// console.log(raceCars.length);
+			}
 		}
 	},
 
 	startRace: function (o) {
-		setInterval(function () {
+		o.interval = setInterval(function () {
 			o.moveRace(o.raceCars, o.speedest);
-		}, 100);
+		}, 10);
+	},
+
+	createPodium: function () {
+		var podiumDiv = document.createElement("div");
+		var imgPodiumFirst = document.createElement("img");
+		var imgPodiumSecond = document.createElement("img");
+		var imgPodiumThird = document.createElement("img");
+
+		podiumDiv.setAttribute("id", "podium");
+		for (var i = 0; i < 3; i++) {
+			if (i == 0) {
+				imgPodiumFirst.setAttribute("id", i);
+				imgPodiumFirst.setAttribute("src", "images/podium/premier.png");
+				imgPodiumFirst.style.left =
+					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumFirst.style.top =
+					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
+					25 +
+					"px";
+				imgPodiumFirst.style.width = 64 + "px";
+				document.getElementById("race-course").appendChild(imgPodiumFirst);
+			}
+			if (i == 1) {
+				imgPodiumSecond.setAttribute("id", i);
+				imgPodiumSecond.setAttribute("src", "images/podium/second.jpg");
+				imgPodiumSecond.style.left =
+					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumSecond.style.top =
+					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
+					25 +
+					"px";
+				imgPodiumSecond.style.width = 64 + "px";
+				document.getElementById("race-course").appendChild(imgPodiumSecond);
+			}
+			if (i == 2) {
+				imgPodiumThird.setAttribute("id", i);
+				imgPodiumThird.setAttribute("src", "images/podium/troisieme.jpg");
+				imgPodiumThird.style.left =
+					parseInt(this.raceCars[this.podium[i]].image.style.left) - 200 + "px";
+				imgPodiumThird.style.top =
+					parseInt(this.raceCars[this.podium[i]].image.style.marginTop) +
+					25 +
+					"px";
+				imgPodiumThird.style.width = 64 + "px";
+				document.getElementById("race-course").appendChild(imgPodiumThird);
+			}
+		}
 	},
 };
 

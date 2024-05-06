@@ -88,6 +88,8 @@ body {
 					}
 				}
 				div#race-course {
+					left: 0;
+					width: 3800px;
 					top: 50%;
 					position: relative;
 					//overflow: hidden;
@@ -96,6 +98,7 @@ body {
 					height: 100%;
 					img {
 						position: absolute;
+
 						// transition: 0.5s ease-out;
 					}
 				}
