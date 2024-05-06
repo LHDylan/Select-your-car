@@ -85,6 +85,8 @@ body div#wrapper main div#race-container div#race-buttons button {
   padding: 10px;
 }
 body div#wrapper main div#race-container div#race-course {
+  left: 0;
+  width: 3800px;
   top: 50%;
   position: relative;
   background-image: url("../images/piste.png");
