@@ -41,6 +41,9 @@ var Json = {
 		typePlaceholder.setAttribute("selected", "selected");
 		typePlaceholder.setAttribute("disabled", "disabled");
 		typeSelect.appendChild(typePlaceholder).innerHTML = "-- le type --";
+		typeSelect.addEventListener("change", function () {
+			o.showDescription();			
+		});
 
 		for (var i = 0; i < voitureList.length; i++) {
 			var typeOption = document.createElement("option");
@@ -104,6 +107,7 @@ var Json = {
 		});
 
 		// Ajout des éléments au form
+		//création plusieurs noeuds dans le form
 		form.append(
 			typeLabel,
 			typeSelect,
@@ -117,12 +121,20 @@ var Json = {
 		);
 
 		// Ajout du form au formContainer qui représente la div id#form-container
+		//(formContainer propriete initier à null au debut)
 		this.formContainer.appendChild(form);
+	},
+
+	// Montrer la description des véhicules
+	showDescription: function () {
+		var value = document.getElementById("type-select").value;
+		var description = document.getElementById("description-container");
+		// console.log(value);
 	},
 
 	// Function qui reçoit les données du formulaire
 	createVoiture: function (o) {
-		if (o.raceCars.length > 3) {
+		if (o.raceCars.length === 4) {
 			alert("Vous avez atteint le nombre maximum de voitures");
 			document.getElementById("container").style.display = "none";
 			o.createRace();
@@ -130,6 +142,8 @@ var Json = {
 			typeValue = document.getElementById("type-select").value;
 			colorValue = document.getElementById("color-select").value;
 			speedValue = document.getElementById("speed-select").value;
+		
+
 			if (typeValue && colorValue && speedValue) {
 				// console.log(typeValue, colorValue);
 				var v0 = document.createElement("img");
@@ -157,7 +171,6 @@ var Json = {
 		newVoiture.image = image;
 		newVoiture.color = colorValue;
 		newVoiture.speed = speedValue;
-		newVoiture.position = 0;
 		newVoiture.left = 0;
 		newVoiture.top = nbVoiture * 110;
 		newVoiture.arrived = false;
@@ -172,7 +185,7 @@ var Json = {
 	createRace: function () {
 		raceContainer = document.getElementById("race-container");
 		this.raceContainer.style.display = "block";
-		// document.getElementsByTagName("body")[0].style.width = "3770px";
+		document.getElementsByTagName("body")[0].style.width = "3770px";
 
 		// Création d'une div pour les fonctionnalités de la course
 		var RaceButtons = document.createElement("div");
@@ -185,6 +198,7 @@ var Json = {
 		var o = this;
 		buttonRaceStart.addEventListener("click", function () {
 			o.startRace(o);
+			o.moveScreen();
 		});
 		// app.startRace(app.raceCars);
 
@@ -244,6 +258,13 @@ var Json = {
 		o.interval = setInterval(function () {
 			o.moveRace(o.raceCars, o.speedest);
 		}, 10);
+	}, 
+	
+	moveScreen: function () {
+		window.scrollTo({
+			left: 3320,
+			behavior: "smooth",
+		  });
 	},
 
 	createPodium: function () {
@@ -295,21 +316,4 @@ var Json = {
 
 //defiler le background en même temps que les voitures
 
-//faire un clear intervalle quand le scroll du background est terminé
-
-// arreter la course a la fin du background
-
-// Faire le podium des 3 premiers
-
-// console.log(raceCars[i].position);
-// console.log(document.getElementsByTagName("img")[i]);
-// raceCars[i].position += raceCars[i].speed;
-/* 			if (raceCars[i].position < 3770) {
-  // document.querySelector("#race-container img:first-of-type").style.left =+ 50;
-  // document.getElementsByTagName("img")[i].style.left += raceCars[i].speed + "px";
-  console.log("on avance");
-  // https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
-} else {
-  ("Bravo, vous avez gagné !");
-  // break;
-} */
+console.log("Développé par Kevin, Jossua, Alex et Dylan - AFPA 2024");

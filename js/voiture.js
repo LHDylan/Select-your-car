@@ -36,6 +36,5 @@ var voiture = {
 	speed: null,
 	top: null,
 	left: null,
-	position: null,
 	arrived: false,
 };
